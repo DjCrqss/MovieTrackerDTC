@@ -41,9 +41,24 @@ public class GUI
         UI.println("\n------  Add Movie  ------");
         String title =  UI.askString("Movie title: ").trim();
         String director = UI.askString("Movie director: ").trim();
-        String genre = UI.askString("Movie genre: ").trim();
-        int rating = UI.askInt("Your rating (0-5): ");
-        database1.createMovie(title, director, genre, rating);
+        String genre = UI.askString("Movie genre: ").trim();int rating = 0;
+        boolean askAgain = true;
+        while (askAgain == true){
+            
+            try{
+                rating = UI.askInt("Your rating (0-5): ");
+                if (rating < 0 || rating > 5){
+                    throw new ArithmeticException();
+                } else{
+                    askAgain = false;
+                }
+            }
+            catch(ArithmeticException ae){
+                UI.println("Your rating (0-5):  (must be between 0-5): ");
+            }
+        }
+        database1.createMovie(title, genre, director, rating);
+        UI.println("Added " + title + " to the movie list.");
     }
     
     /**
@@ -82,8 +97,23 @@ public class GUI
             UI.print("☆");
         }
         UI.println();
+        
+        // DRAW GUI
+        //UI.setColor(color.Blue);
+        UI.fillRect(50, 50, 250, 200);
+        UI.setFontSize(18);
+        UI.setColor(Color.darkGray);
+        UI.drawString(database1.returnMovieTitle(movieID), 50, 275);
+        UI.drawString(database1.returnMovieDirector(movieID), 50, 300);
+        UI.drawString(database1.returnMovieGenre(movieID), 50, 325);
+        for (int i = 0; i < database1.returnMovieRating(movieID); i++){
+            UI.fillOval(50 + (22 * i), 350, 20, 20);
+        }
+        for (int i = 5; i > database1.returnMovieRating(movieID); i--){
+            UI.drawOval(50 + (database1.returnMovieRating(movieID) * 22) + (22 * (5-i)), 350, 20, 20);
+        }
     }
-    
+
     /**
      * Main routine
      * Setup GUI
@@ -93,16 +123,14 @@ public class GUI
         GUI obj = new GUI();  // Make a GUI object
         
         UI.initialise();
-        UI.setWindowSize(400, 500);
+        UI.setWindowSize(700, 500);
         UI.addButton("Add Movie", obj::addMovie);
         UI.addButton("Search Movie", obj::searchMovie);
         UI.addButton("Display Movies", obj::displayMovies);
         UI.addButton("Quit", UI::quit);
-        UI.setDivider(100.0);     // must come after setting up buttons etc.
+        UI.setDivider(0.5);     // must come after setting up buttons etc.
     }
-
-    
-    
+ 
     private void clearScreen(){
         UI.clearGraphics();
     }
