@@ -117,7 +117,7 @@ public class MovieDatabase
         }
         int resultsCount = 0;
         for (int i = 0; i < movieList.size(); i++){
-            if ( movieID != i && movieList.get(i).getRating() == 5){
+            if ( movieID != i && movieList.get(i).getRating() >= 4){
                 if (resultsCount < 2){
                     movieArray[resultsCount] = movieList.get(i).getMovieTitle();
                     resultsCount++;
@@ -126,11 +126,6 @@ public class MovieDatabase
         }
         return movieArray;
     }
-    
-    
-    
-    
-  
     
     /**
      * Get name of Movie object inside of movieList HashMap

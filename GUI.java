@@ -31,11 +31,22 @@ public class GUI
         UI.clearGraphics();
         UI.println("\n------  Add Movie  ------");
         // ask user for parameters of movie
-        String title =  UI.askString("Movie title: ").trim();
-        String director = UI.askString("Movie director: ").trim();
-        String genre = UI.askString("Movie genre: ").trim();
-        int rating = 0;
+        String title = "";
+        String director = "";
+        String genre = "";
         boolean askAgain = true;
+        while (askAgain == true){
+            title =  UI.askString("Movie title: ").trim();
+            director = UI.askString("Movie director: ").trim();
+            genre = UI.askString("Movie genre: ").trim();
+            if (!title.equals("") && !director.equals("") && !genre.equals("")){
+                askAgain = false;
+            } else{
+                UI.println("One of your inputs are blank.\n");
+            }
+        }
+        int rating = 0;
+        askAgain = true;
         while (askAgain == true){
             // error checking for rating input belove 0 or above 5
             try{
@@ -129,9 +140,7 @@ public class GUI
         for (int i = 5; i > database1.returnMovieRating(movieID); i--){
             UI.drawOval(130 + (database1.returnMovieRating(movieID) * 22) + (22 * (5-i)), 425, 20, 20);
         }
-        // Find movie to recommend
-        //int topMovie = database1.returnTopMovieID(movieID);
-        
+        // Find movie to recommend    
             
         String[] moviesList = database1.getTopRecommended(movieID);
         if (moviesList[0] != "null"){
