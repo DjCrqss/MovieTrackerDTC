@@ -1,3 +1,6 @@
-,Dogs,Horror,DJ,5
-,Cats,Family,Leon,4
-,Fish,Bbbb,Gggg,1
+,Tenet,Action,Christopher Nolan,4
+,The Dark Knight,Action,Christopher Nolan,5
+,Speed Racer,Family,Wachowski,3
+,Titanic,Romance,James Cameron,2
+,Bad Movie,Boring,Leon,1
+,1917,Sam Mendes,Drama,4

@@ -16,10 +16,10 @@ public class Movie
 
     /**
      * Constructor for objects of class Movie
-     * @param   String movieTitle   Name of movie
-     * @param   String genre        Movie genre
-     * @param   String director     Director of movie
-     * @param   int rating          Rating of movie in stars
+     * @param   movieTitle   String Name of movie
+     * @param   genre        String Movie genre
+     * @param   director     String Director of movie
+     * @param   rating       Int Rating of movie in stars
      */
     public Movie(String movieTitle, String genre, String director, int rating)
     {
