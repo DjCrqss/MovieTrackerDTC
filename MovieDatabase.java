@@ -118,7 +118,7 @@ public class MovieDatabase
         // set returned movie num to -1 in case no movie is found
         int movieNum = -1;
         int resultsCount = 0;
-        // iterate through movie array and set movieNum ID to movie with same name
+        // iterate movie array and set movieNum ID to movie with same name
         for (int i = 0; i < movieList.size(); i++) {
             if ( movieList.get(i).getMovieTitle().toLowerCase()
                     .equals(titleQuery.toLowerCase().trim())) {
@@ -141,6 +141,20 @@ public class MovieDatabase
             movieArray[i] = "null";
         }
         int resultsCount = 0;
+        // get movies that are the same genre or director if rating is high
+        for (int i = 0; i < movieList.size(); i++) {
+            if ( movieID != i && (movieList.get(movieID).getRating() >= 3
+                && movieList.get(movieID).getGenre()
+                .equals(movieList.get(movieID).getGenre())
+                || movieList.get(movieID).getDirector()
+                .equals(movieList.get(movieID).getDirector()))) {
+                if (resultsCount < 2) {
+                    movieArray[resultsCount] = movieList.get(i).getMovieTitle();
+                    resultsCount++;
+                }
+            }
+        }
+        // populate results with highly rated movies otherwise
         for (int i = 0; i < movieList.size(); i++) {
             if ( movieID != i && movieList.get(i).getRating() >= 4) {
                 if (resultsCount < 2) {
